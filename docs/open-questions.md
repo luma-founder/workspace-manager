@@ -122,7 +122,7 @@ This avoids mixing "stuff I haven't sorted" with "stuff I'm actively messing wit
 
 ### Design rules (once decided)
 
-- Top-level in `~/Workspace/` — a peer of `code/`, `research/`, etc.
+- Top-level in `~/Workspace/` — a peer of `code/`, `notebooks/`, etc.
 - Flat — no subdirectories, no organization inside it
 - Portable — syncs across machines like any other top-level directory
 - Manageable — toolkits can include scripts to list stale items or prompt cleanup

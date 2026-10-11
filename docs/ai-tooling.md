@@ -102,7 +102,7 @@ Given these mechanics, here's what the workspace hierarchy actually provides:
 
 ## Non-code directories
 
-Research and studio projects don't benefit from the same org cascade. Each research project is its own self-contained AI working directory — but they can share tooling by importing `toolkits/` context modules via `@path`. A `research/CLAUDE.md` with shared research methodology will auto-inherit into all research projects thanks to the tree walk.
+Notebook and studio projects don't benefit from the same org cascade. Each notebook project is its own self-contained AI working directory — but they can share tooling by importing `toolkits/` context modules via `@path`. A `notebooks/CLAUDE.md` with shared research methodology will auto-inherit into all notebook projects thanks to the tree walk.
 
 Studio projects are organized by medium (which maps to toolchain, not AI context). Keep them flat or shallow — don't force the org pattern where it doesn't apply.
 

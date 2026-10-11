@@ -11,7 +11,7 @@ Each project is its own git repo. There is no monorepo or sync daemon. Machines 
 | Directory | Sync method | Notes |
 |---|---|---|
 | `code/<org>/<project>/` | Git clone per project | Each project is an independent repo |
-| `research/<project>/` | Git clone per project | Some may be local-only (no remote) |
+| `notebooks/<project>/` | Git clone per project | Some may be local-only (no remote) |
 | `studio/<medium>/<project>/` | Git + LFS, or manual backup | Large binary assets need special handling |
 | `toolkits/<tool>/` | Git clone per tool | Mix of your own tools and third-party repos |
 | `knowledge/<item>/` | Git, cloud sync, or git clone | PKM vault syncs via cloud or git; reference items cloned via git |
@@ -29,7 +29,7 @@ Each machine has a different subset of the workspace. The `machines` section of 
       "skip": []
     },
     "macbook-work": {
-      "skip": ["studio", "research"],
+      "skip": ["studio", "notebooks"],
       "code_orgs": ["org-1", "third-party"]
     }
   }

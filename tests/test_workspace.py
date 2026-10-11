@@ -106,11 +106,11 @@ def make_config(tmpdir, **overrides):
                 },
             ],
         },
-        "research": {
+        "notebooks": {
             "repos": [
                 {
                     "url": "git@github.com:test/tax-prep.git",
-                    "path": "research/tax-prep",
+                    "path": "notebooks/tax-prep",
                 }
             ]
         },
@@ -292,7 +292,7 @@ class TestInitCreatesDirectories(SafeTestCase):
 
     def test_skips_dirs_per_machine_config(self):
         with TemporaryDirectory() as tmpdir:
-            config = make_config(tmpdir, machine_config={"skip": ["studio", "research"]})
+            config = make_config(tmpdir, machine_config={"skip": ["studio", "notebooks"]})
             workspace_root = Path(tmpdir)
             args = MagicMock(dry_run=False, config_repo=None, config_url=None)
 
@@ -301,7 +301,7 @@ class TestInitCreatesDirectories(SafeTestCase):
                 ws.cmd_init(args)
 
             self.assertFalse((workspace_root / "studio").exists())
-            self.assertFalse((workspace_root / "research").exists())
+            self.assertFalse((workspace_root / "notebooks").exists())
             self.assertTrue((workspace_root / "code").exists())
 
     def test_filters_code_orgs_per_machine(self):
@@ -358,7 +358,7 @@ class TestCloneRepos(SafeTestCase):
 
             with patch("subprocess.run", mock_run):
                 ws.clone_repos(
-                    config, workspace_root, {"research", "knowledge"}, {}, dry_run=False
+                    config, workspace_root, {"notebooks", "knowledge"}, {}, dry_run=False
                 )
 
             clone_calls = [
@@ -548,7 +548,7 @@ class TestStatus(SafeTestCase):
             workspace_root = Path(tmpdir)
 
             (workspace_root / "code").mkdir()
-            (workspace_root / "research").mkdir()
+            (workspace_root / "notebooks").mkdir()
 
             config_file = setup_config(tmpdir, config)
             config_dir = Path(tmpdir) / "config"
@@ -572,7 +572,7 @@ class TestPull(SafeTestCase):
             workspace_root = Path(tmpdir)
 
             # Create repo dirs with .git inside
-            for repo in config["code"]["repos"] + config["research"]["repos"] + config["knowledge"]["repos"]:
+            for repo in config["code"]["repos"] + config["notebooks"]["repos"] + config["knowledge"]["repos"]:
                 repo_path = workspace_root / repo["path"]
                 repo_path.mkdir(parents=True, exist_ok=True)
                 (repo_path / ".git").mkdir()
@@ -621,7 +621,7 @@ class TestPull(SafeTestCase):
             workspace_root = Path(tmpdir)
 
             # Create all repo dirs with .git
-            all_repos = config["code"]["repos"] + config["research"]["repos"] + config["knowledge"]["repos"]
+            all_repos = config["code"]["repos"] + config["notebooks"]["repos"] + config["knowledge"]["repos"]
             for repo in all_repos:
                 repo_path = workspace_root / repo["path"]
                 repo_path.mkdir(parents=True, exist_ok=True)
@@ -684,7 +684,7 @@ class TestValidate(SafeTestCase):
             (workspace_root / d).mkdir(exist_ok=True)
         for org in config["code"]["orgs"]:
             (workspace_root / "code" / org).mkdir(parents=True, exist_ok=True)
-        for repo in (config["code"]["repos"] + config["research"]["repos"] + config["knowledge"]["repos"]):
+        for repo in (config["code"]["repos"] + config["notebooks"]["repos"] + config["knowledge"]["repos"]):
             (workspace_root / repo["path"]).mkdir(parents=True, exist_ok=True)
         # Create dotfiles symlink pointing to a real target
         dotfiles_target = workspace_root / "fake-dotfiles"

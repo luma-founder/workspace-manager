@@ -21,7 +21,7 @@ DEFAULT_WORKSPACE_ROOT = Path.home() / "Workspace"
 EXPECTED_REPO_PATH = "code/personal/workspace-manager"
 
 # Top-level directories that are always created (unless skipped by machine config)
-TOP_LEVEL_DIRS = ["code", "research", "studio", "knowledge", "toolkits"]
+TOP_LEVEL_DIRS = ["code", "notebooks", "studio", "knowledge", "toolkits"]
 
 
 def load_config():
@@ -37,7 +37,7 @@ def load_config():
         sys.exit(1)
 
     # Validate repo entries have required fields
-    for section in ["code", "research", "knowledge", "toolkits"]:
+    for section in ["code", "notebooks", "knowledge", "toolkits"]:
         for i, repo in enumerate(config.get(section, {}).get("repos", [])):
             if "url" not in repo or "path" not in repo:
                 print(f"Error: {section}.repos[{i}] missing 'url' or 'path' in config.")
@@ -216,7 +216,7 @@ def clone_repos(config, workspace_root, skip_dirs, machine_config, dry_run):
     code_orgs_filter = machine_config.get("code_orgs")
 
     # studio is excluded — large binary assets use Git LFS/cloud storage, not git clone
-    sections = ["code", "research", "knowledge", "toolkits"]
+    sections = ["code", "notebooks", "knowledge", "toolkits"]
     for section in sections:
         if section in skip_dirs:
             continue
@@ -342,7 +342,7 @@ def cmd_pull(args):
     section_filter = args.section if hasattr(args, "section") and args.section else None
 
     # studio is excluded — large binary assets use Git LFS/cloud storage, not git clone
-    sections = ["code", "research", "knowledge", "toolkits"]
+    sections = ["code", "notebooks", "knowledge", "toolkits"]
 
     if section_filter and section_filter not in sections:
         print(f"Error: unknown section '{section_filter}'.")
@@ -439,7 +439,7 @@ def cmd_validate(args):
             errors.append(f"Missing org directory: code/{org}/")
 
     # Check repos
-    sections = ["code", "research", "knowledge", "toolkits"]
+    sections = ["code", "notebooks", "knowledge", "toolkits"]
     for section in sections:
         if section in skip_dirs:
             continue
@@ -532,7 +532,7 @@ def cmd_status(args):
 
     # Check repos
     print()
-    sections = ["code", "research", "knowledge", "toolkits"]
+    sections = ["code", "notebooks", "knowledge", "toolkits"]
     for section in sections:
         if section in skip_dirs:
             continue
@@ -638,7 +638,7 @@ examples:
     pull_parser.add_argument(
         "section",
         nargs="?",
-        help="limit to a specific section (code, research, knowledge, toolkits)",
+        help="limit to a specific section (code, notebooks, knowledge, toolkits)",
     )
 
     # validate

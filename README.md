@@ -41,7 +41,7 @@ cd workspace-manager
 │   ├── bytebytego/          #   Example system design reference (read-only)
 │   └── ...                  #   Documents, guides, runbooks, courses, help, etc.
 │
-├── research/                # Single-use research, analysis, and intelligence gathering
+├── notebooks/               # Single-use research, analysis, and intelligence gathering
 │   ├── market-research/     #   Market research and analysis
 │   └── ...                  #   Health analysis, business strategy, deep-dives, etc.
 │
@@ -80,7 +80,7 @@ cd workspace-manager
 | `workspace init --dry-run` | Preview what init would do |
 | `workspace status` | Show what exists and what's missing |
 | `workspace pull` | Pull latest changes for all repos (excludes studio) |
-| `workspace pull <section>` | Pull only repos in a specific section (code, research, knowledge, toolkits) |
+| `workspace pull <section>` | Pull only repos in a specific section (code, notebooks, knowledge, toolkits) |
 | `workspace validate` | Validate config and check directory tree is in sync |
 
 Existing directories are skipped. Existing repos are not re-cloned. Studio projects are excluded from init and pull — they typically use Git LFS or cloud storage.
@@ -99,7 +99,7 @@ Config lives in `config/config.json` (gitignored). See [templates/config.example
 | `dotfiles` | Path to your dotfiles directory (default: `~/.local/share/chezmoi`) |
 | `bin_link` | Optional path to symlink the `workspace` command (e.g., `~/.local/bin/workspace`) |
 | `code.orgs` | List of org directories to create under `code/` |
-| `code.repos` / `research.repos` / `knowledge.repos` / `toolkits.repos` | Repos to clone, each with `url` and `path` |
+| `code.repos` / `notebooks.repos` / `knowledge.repos` / `toolkits.repos` | Repos to clone, each with `url` and `path` |
 | `studio.categories` | Subdirectories to create under `studio/` |
 | `machines.<name>.skip` | Top-level directories to skip on this machine |
 | `machines.<name>.code_orgs` | Limit which code orgs are set up on this machine |
@@ -156,7 +156,7 @@ The target depth is `Workspace/<grouping>/<project>/`. The only exception is `co
 | Path pattern | Depth | Why |
 |---|---|---|
 | `code/<org>/<project>` | 3 | Org grouping maps to how you switch between clients/employers |
-| `research/<project>` | 2 | Flat — no sub-grouping needed |
+| `notebooks/<project>` | 2 | Flat — no sub-grouping needed |
 | `studio/<category>` or `studio/<category>/<project>` | 2–3 | Categories organize by medium; some (productions/) have sub-projects |
 | `knowledge/<item>` | 2 | Flat — PKM, reference material, and documents side by side |
 | `toolkits/<tool>` | 2 | Flat — each entry is its own repo |
@@ -166,7 +166,7 @@ The target depth is `Workspace/<grouping>/<project>/`. The only exception is `co
 Every top-level directory is activity-based and universal:
 
 - **code/** — present on every dev machine
-- **research/** — present wherever you do research and analysis
+- **notebooks/** — present wherever you do research and analysis
 - **studio/** — present on creative workstations
 - **toolkits/** — present wherever you use AI tools
 - **knowledge/** — present wherever you manage personal knowledge, reference material, or documents
@@ -194,7 +194,7 @@ Per-directory rules for what goes where and how each section is used.
 - `experiments/` is for prototypes and experiments. When one graduates, move it to the appropriate org. When one dies, delete it.
 - AI tool source code is developed here like any other project. When ready for consumption, tools are published as standalone repos and cloned into `toolkits/`.
 
-### research/
+### notebooks/
 
 - Each subdirectory is a focused research or analysis project.
 - These are non-code projects: tax analysis, health research, business strategy, data synthesis, multi-step investigations.

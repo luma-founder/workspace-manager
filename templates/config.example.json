@@ -22,11 +22,11 @@
       }
     ]
   },
-  "research": {
+  "notebooks": {
     "repos": [
       {
         "url": "git@github.com:you/market-research.git",
-        "path": "research/market-research"
+        "path": "notebooks/market-research"
       }
     ]
   },
@@ -68,7 +68,7 @@
       "skip": []
     },
     "macbook-work": {
-      "skip": ["studio", "research"],
+      "skip": ["studio", "notebooks"],
       "code_orgs": ["org-1", "third-party"]
     }
   }

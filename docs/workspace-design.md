@@ -67,7 +67,7 @@ AI tools developed as source code live in `code/`. When ready for use, they get 
 Every top-level directory is activity-based. Not all directories need to be present on every machine — only create what the machine is used for:
 
 - **code/** — present on every dev machine
-- **research/** — present wherever you do research and analysis
+- **notebooks/** — present wherever you do research and analysis
 - **studio/** — present on creative workstations
 - **toolkits/** — present wherever you use AI tools
 - **knowledge/** — present wherever you manage personal knowledge, reference material, or documents
